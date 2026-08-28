@@ -21,7 +21,7 @@ def generate_response(messages):
         messages=messages,
         temperature=0.7,
         top_p=0.95,
-        max_tokens=2000,
+        max_tokens=16384,
         extra_body={
             "chat_template_kwargs": {
                 "enable_thinking": True
@@ -29,4 +29,5 @@ def generate_response(messages):
         },
     )
 
+    # returning the response
     return response.choices[0].message.content
