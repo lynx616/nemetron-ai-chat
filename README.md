@@ -23,37 +23,27 @@ The project is intended as a learning-friendly example of connecting a React cha
 ### AI Model
 - `nvidia/nemotron-3-ultra-550b-a55b`
 
-## Project Structure
+## How It Works Till now
+
+The request flow is:
 
 ```text
-nemetron-ai-chat/
-├── backend/
-│   ├── app/
-│   │   ├── routes/
-│   │   │   └── chat.py
-│   │   ├── schema/
-│   │   │   └── chat.py
-│   │   ├── services/
-│   │   │   └── nvidia.py
-│   │   ├── __init__.py
-│   │   └── main.py
-│   ├── app.py
-│   ├── requirements.txt
-│   └── .gitignore
-│
-├── frontend/
-│   ├── src/
-│   │   ├── layouts/
-│   │   │   └── ChatBox.jsx
-│   │   ├── App.jsx
-│   │   ├── index.css
-│   │   └── main.jsx
-│   ├── public/
-│   ├── package.json
-│   ├── package-lock.json
-│   └── vite.config.js
-│
-└── README.md
+React Chat UI
+      │
+      │ POST /chat
+      ▼
+FastAPI Backend
+      │
+      │ NVIDIA API request
+      ▼
+Nemotron 3 Ultra
+      │
+      │ AI response
+      ▼
+FastAPI
+      │
+      ▼
+React Chat UI
 ```
 
 ## Prerequisites
@@ -265,28 +255,6 @@ Then open:
 http://localhost:5173
 ```
 
-## How It Works
-
-The request flow is:
-
-```text
-React Chat UI
-      │
-      │ POST /chat
-      ▼
-FastAPI Backend
-      │
-      │ NVIDIA API request
-      ▼
-Nemotron 3 Ultra
-      │
-      │ AI response
-      ▼
-FastAPI
-      │
-      ▼
-React Chat UI
-```
 
 The frontend sends the user's message to the backend. The backend adds a system message, sends the conversation to NVIDIA's API, and returns the model response to the frontend.
 
