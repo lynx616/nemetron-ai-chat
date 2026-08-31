@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from .routes import chat
+from .routes import conversitions
 
 
 
@@ -16,6 +17,7 @@ app.add_middleware(
 )
 
 app.include_router(chat.router);
+app.include_router(conversitions.router);
 
 @app.get("/heath")
 def heath():

@@ -5,7 +5,7 @@ from sqlalchemy.orm import Mapped, mapped_column
 
 from ..database.base import Base
 
-# creating table
+
 class Conversation(Base):
     __tablename__ = "conversations"
 
@@ -14,16 +14,19 @@ class Conversation(Base):
     )
 
     title: Mapped[str] = mapped_column(
-        String(255)
+        String(255),
+        nullable=False
     )
 
     created_at: Mapped[datetime] = mapped_column(
-        DateTime,
-        default=lambda: datetime.now(timezone.utc)
+        DateTime(timezone=True),
+        default=lambda: datetime.now(timezone.utc),
+        nullable=False
     )
 
     updated_at: Mapped[datetime] = mapped_column(
-        DateTime,
+        DateTime(timezone=True),
         default=lambda: datetime.now(timezone.utc),
-        onupdate=lambda: datetime.now(timezone.utc)
+        onupdate=lambda: datetime.now(timezone.utc),
+        nullable=False
     )
