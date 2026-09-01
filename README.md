@@ -4,40 +4,6 @@ A simple full-stack AI chat application built with **React + Vite** on the front
 
 The project is intended as a learning-friendly example of connecting a React chat UI to a Python API and an LLM provider.
 
-### High level architecture 
-
-                    USER
-                      │
-                      ▼
-              ┌──────────────┐
-              │ React + Vite │
-              └──────┬───────┘
-                     │
-                     │ HTTP
-                     ▼
-              ┌──────────────┐
-              │   FastAPI    │
-              └──────┬───────┘
-                     │
-          ┌──────────┼───────────┐
-          │          │           │
-          ▼          ▼           ▼
-   Conversations   RAG       Nemotron
-          │          │           │
-          │          ▼           │
-          │     Embeddings       │
-          │          │           │
-          │          ▼           │
-          │      pgvector        │
-          │          │           │
-          └──────────┼───────────┘
-                     │
-                     ▼
-              ┌──────────────┐
-              │ PostgreSQL   │
-              │ + pgvector   │
-              └──────────────
-
 ### 🛠️ Nemotron AI Chat — Tech Stack
 
 * **Frontend:** React + Vite + JavaScript + CSS
