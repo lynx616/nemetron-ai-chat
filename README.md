@@ -4,47 +4,69 @@ A simple full-stack AI chat application built with **React + Vite** on the front
 
 The project is intended as a learning-friendly example of connecting a React chat UI to a Python API and an LLM provider.
 
-## Tech Stack
+### 🛠️ Nemotron AI Chat — Tech Stack
 
-### Frontend
-- React 19
-- Vite 8
-- JavaScript
-- Fetch API
+* **Frontend:** React + Vite + JavaScript + CSS
+* **Backend:** Python + FastAPI
+* **Database:** PostgreSQL
+* **ORM:** SQLAlchemy
+* **Migrations:** Alembic
+* **Vector Search:** pgvector
+* **LLM:** NVIDIA Nemotron API
+* **Embeddings:** Embedding model TBD
+* **RAG:** Document extraction → Chunking → Embeddings → pgvector → Retrieval → Nemotron
+* **Documents:** PDF/TXT/DOCX processing
+* **Validation:** Pydantic
+* **Testing:** Pytest + FastAPI Swagger
+* **Secrets:** `.env` + python-dotenv
+* **Version Control:** Git + GitHub
+* **Deployment:** Vercel (frontend) + cloud FastAPI backend + managed PostgreSQL
 
-### Backend
-- Python
-- FastAPI
-- Uvicorn
-- OpenAI Python SDK
-- python-dotenv
-- NVIDIA NIM API
-
-### AI Model
-- `nvidia/nemotron-3-ultra-550b-a55b`
+**Core architecture:**
+`React → FastAPI → PostgreSQL/pgvector → RAG → Nemotron → Response`
 
 ## How It Works Till now
 
 The request flow is:
 
-```text
-React Chat UI
-      │
-      │ POST /chat
-      ▼
-FastAPI Backend
-      │
-      │ NVIDIA API request
-      ▼
-Nemotron 3 Ultra
-      │
-      │ AI response
-      ▼
-FastAPI
-      │
-      ▼
-React Chat UI
-```
+PHASE 1 — Chat persistence
+────────────────────────────
+✅ PostgreSQL
+✅ Conversation model
+✅ Message model
+✅ Alembic
+✅ DB session
+✅ POST /conversations
+✅ POST /chat with conversation_id
+        │
+        ▼
+👉 NEXT: Frontend integration
+        │
+        ├── Create new conversation
+        ├── Store conversation_id
+        ├── Send ID with every message
+        ├── Load old conversations
+        ├── Switch between conversations
+        └── Persist chat after refresh
+        │
+        ▼
+PHASE 2 — RAG
+────────────────────────────
+   Documents
+       ↓
+   Text extraction
+       ↓
+   Chunking
+       ↓
+   Embeddings
+       ↓
+   pgvector
+       ↓
+   Similarity search
+       ↓
+   Context
+       ↓
+   Nemotron
 
 ## Prerequisites
 
