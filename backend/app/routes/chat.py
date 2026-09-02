@@ -6,6 +6,7 @@ from ..models.conversation import Conversation
 from ..models.message import Message
 from ..schema.chat import ChatRequest
 from ..services.nvidia import generate_response
+from datetime import datetime, timezone
 
 
 router = APIRouter()
@@ -17,7 +18,7 @@ async def chat(
     db: Session = Depends(get_db)
 ):
 
-    # 1. Find the conversation
+    # 1. Find the conversation using the conversation_id from the request
     conversation = db.get(
         Conversation,
         request.conversation_id
@@ -76,6 +77,8 @@ async def chat(
     db.add(assistant_message)
     db.commit()
 
+    conversation.updated_at = datetime.now(timezone.utc)
+    db.commit()
     # 7. Return response
     return {
         "response": response,
